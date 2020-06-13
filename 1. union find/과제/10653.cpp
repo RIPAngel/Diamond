@@ -1,3 +1,4 @@
+//timeout code
 #include <iostream>
 #include <cstdio>
 #include <vector>
@@ -6,7 +7,7 @@
 #define fi first
 #define se second
 using namespace std;
-int n, k, res = INT_MAX;
+int n, k, res = 2147483646;
 pair <int, int> points[505];
 
 int distanceCalc (int a, int b) {
@@ -14,20 +15,19 @@ int distanceCalc (int a, int b) {
 }
 
 void dfs (int num, int distance, int skipCnt) {
-    printf ("F : %d %d %d\n", num, distance, skipCnt);
-    if (num == (n - 1)) {
-        if (distance < INT_MAX) {
+    if (num >= (n - 1)) {
+        if (distance < res) {
             res = distance;
         }
         return;
     }
     else {
         if (skipCnt >= k) {
-            dfs (num + 1, distanceCalc (num, num + 1), skipCnt);
+            dfs (num + 1, distance + distanceCalc (num, num + 1), skipCnt);
         }
         else {
-            dfs (num + 1, distanceCalc (num, num + 1), skipCnt);
-            dfs (num + 2, distanceCalc (num, num + 2), skipCnt + 1);
+            dfs (num + 1, distance + distanceCalc (num, num + 1), skipCnt);
+            dfs (num + 2, distance + distanceCalc (num, num + 2), skipCnt + 1);
         }
     }
 }
