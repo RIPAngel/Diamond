@@ -1,18 +1,22 @@
 #include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <vector>
 using namespace std;
-const int IND = 1e4 * 5 + 15;
-bool chk[IND];
-int n, m, horse[IND];
-vector <int> data[IND];
-
-int main () {
-    cin >> n >> m;
+const int IND = 1e5 * 5 + 15;
+typedef struct graph {
+    int horse;
+    int from;
+    int to;
+}graph;
+vector <graph> d;
+int p[IND], n, m;
+void init () {
     for (int i = 1; i <= m; ++i) {
-        int a, b;
-        cin >> a >> b >> horse[i];
-        data[i].push_back (a);
-        data[i].push_back (b);
-        data[b].push_back (i);
-        data[a].push_bacl (i);
+        p[i] = i;
     }
 }
+int find (int x) {
+    return x == p[x] ? x : p[x] = find(p[x]);
+}
+void merge ()

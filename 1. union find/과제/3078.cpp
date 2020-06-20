@@ -1,29 +1,37 @@
 #include <iostream>
+#include <cstdio>
 #include <string>
-#include <limits>
+#include <vector>
 using namespace std;
-const int IND = 1e5 * 3 + 10;
-int n, k, minLength = 20, maxLength = 2;
-string x[IND];
+vector<int> p[25];
+int n, k, res;
+string name[300010];
 
 int main () {
+    int lengthMin = 20, lengthMax = 2;
     cin >> n >> k;
-    for (int i = 0; i < n; ++i) {
-        cin >> x[i];
-        if (x[i].size() > maxLength) {
-            maxLength = x[i].size();
+    for (int i = 1; i <= n; ++i) {
+        cin >> name[i];
+        p[name[i].size()].push_back (i);
+        if (name[i].size() < lengthMin) {
+            lengthMin = name[i].size();
         }
-        if (x[i].size() < minLength) {
-            minLength = x[i].size();
+        if (name[i].size() > lengthMax) {
+            lengthMax = name[i].size();
         }
     }
-    for (int ind = 0; ind < n; ++ind) {
-        for (int i = minLength; i <= maxLength; ++i) {
-            if (x[ind].size() == i) {
-                
+    for (int i = lengthMin; i <= lengthMax; ++i) {
+        if (!p[i].size()) {
+            continue;
+        }
+        else {
+            for (int left = 0, right = (p[i].size() - 1); left <= right; left++, right--) {
+                //printf ("%d %d %d\n", i, left, right);
+                if (p[i][right] - p[i][left] <= k) {
+                    res++;
+                }
             }
         }
     }
-    
-    cout << maxLength << minLength;
+    cout << res;
 }
