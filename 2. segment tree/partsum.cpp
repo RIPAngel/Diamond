@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 const int IND = 1e6 * 4 + 100;
 int n, m, k, arr[IND];
