@@ -1,27 +1,22 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
+#include <algorithm>
 using namespace std;
+int dp[1005][1005];
 string a, b;
-int len_a, len_b, dp[1001][1001];
 
-int run (int ap, int bp) {
-    if (dp[ap][bp] != 0) {
-        return dp[ap][bp];
-    }
-    if (ap == len_a || bp == len_b) {
-        return 0;
-    }
-    if (a[ap] == b[bp]) {
-        return dp[ap][bp] = 1 + run (ap + 1, bp + 1);
-    }
-    return dp[ap][bp] = max(run(ap + 1, bp), run(ap, bp+1));
-}
 int main () {
     cin >> a >> b;
-    len_a = a.size();
-    len_b = b.size();
-    int res = run (0, 0);
-    cout << res;
+    int la = a.size(), lb = b.size();
+    for (int i = 1; i <= la; ++i) {
+        for (int j = 1; j <= lb; ++j) {
+            if (a[i] == b[j]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            } else {
+                dp[i][j] = max (dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+    cout << dp[la][lb];
     return 0;
 }
