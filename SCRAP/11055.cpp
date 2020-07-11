@@ -1,7 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-int D[6974];
-int arr[6974], res;
+int D[6974], arr[6974], res;
 
 int main () {
     int n;
@@ -12,11 +11,12 @@ int main () {
     for (int i = 1; i <= n; ++i) {
         int ma = 0;
         for (int j = 1; j <= i; ++j) {
-            if (arr[j] > arr[i] && ma < D[j]) ma = D[j];
+            if (arr[j] < arr[i] && ma < D[j]) {
+                ma = D[j];
+                res += arr[j];
+            }
         }
         D[i] = ma + 1;
-        res += s
-        D[i];
     }
     cout << res;
     return 0;
