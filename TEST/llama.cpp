@@ -8,11 +8,11 @@ int multiple (int x, int y) {
     if (y == 1) return x % MOD;
     if (y % 2 == 1) {
         int sib = multiple(x, y - 1) % MOD;
-        return ((sib % MOD) * (x % MOD)) % MOD;
+        return (((long long)sib % MOD) * (x % MOD)) % MOD;
     }
     else {
         int al = multiple (x, y/2) % MOD;
-        return (al * al) % MOD;
+        return ((long long)al * al) % MOD;
     }
 }
 int main () {
