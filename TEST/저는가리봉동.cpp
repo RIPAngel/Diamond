@@ -9,6 +9,5 @@ int main () {
         int a, b; cin >> a >> b;
         nde[a].push_back(b);
     }
-    int maxres = 1 << n;
-    
+    int maxres = 1 << n;   
 }
